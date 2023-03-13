@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import ProductsModal from "../products-modal/products-modal.component";
 import { Cart, Product } from "../../common/types/cart-types";
 import CartTable from "../cart-table/cart-table.component";
-
-import styles from "./cart-list.module.scss";
 import Button from "../ui/button/button.component";
 import AddNewCartForm from "../add-new-cart-form.tsx/add-new-cart-form.component";
+
+import styles from "./cart-list.module.scss";
 
 const CartList = () => {
   const [cartList, setCartList] = useState<Cart[]>([]);

@@ -1,0 +1,13 @@
+.product {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgb(220, 219, 219);
+  padding: 10px 0;
+}
+
+.btns {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}

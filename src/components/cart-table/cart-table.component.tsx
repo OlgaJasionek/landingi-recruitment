@@ -19,28 +19,28 @@ const CartTable = ({ onGetCart, cartList, onDeleteCart }: Props) => {
       <Card>
         <table className={styles.table}>
           <thead className={styles.thead}>
-            <tr>
-              <th className={styles.theader}></th>
-              <th className={styles.theader}>Ilość produktów</th>
-              <th className={styles.theader}>Cena koszyka</th>
-              <th className={styles.theader}>Cena koszyka po rabacie</th>
-              <th className={styles.theader}>
+            <tr className={styles.tr}>
+              <th className={styles.tableRow}></th>
+              <th className={styles.tableRow}>Ilość produktów</th>
+              <th className={styles.tableRow}>Cena koszyka</th>
+              <th className={styles.tableRow}>Cena koszyka po rabacie</th>
+              <th className={styles.tableRow}>
                 Ilość wszystkich produktów w koszyku
               </th>
-              <th className={styles.theader}>Produkty w koszyku</th>
+              <th className={styles.tableRow}>Produkty w koszyku</th>
 
-              <th className={styles.theader}></th>
+              <th className={styles.tableRow}></th>
             </tr>
           </thead>
           <tbody>
             {cartList.map(cart => (
-              <tr key={cart.id}>
-                <td className={styles.tbody}>{cart.id}</td>
-                <td className={styles.tbody}>{cart.totalProducts}</td>
-                <td className={styles.tbody}>{cart.total}</td>
-                <td className={styles.tbody}>{cart.discountedTotal}</td>
-                <td className={styles.tbody}>{cart.totalQuantity}</td>
-                <td className={styles.tbody}>
+              <tr key={cart.id} className={styles.tr}>
+                <td className={styles.tableRow}>{cart.id}</td>
+                <td className={styles.tableRow}>{cart.totalProducts}</td>
+                <td className={styles.tableRow}>{cart.total}</td>
+                <td className={styles.tableRow}>{cart.discountedTotal}</td>
+                <td className={styles.tableRow}>{cart.totalQuantity}</td>
+                <td className={styles.tableRow}>
                   <Button
                     onClick={() => onGetCart(cart.id)}
                     theme='text'

@@ -10,8 +10,13 @@
   background-color: transparent;
   transition: background-color 0.7s;
   cursor: pointer;
-}
 
-.iconBtn:hover {
-  background-color: #edecec8f;
+  &:hover {
+    background-color: #edecec8f;
+  }
+
+  &:disabled {
+    background-color: transparent;
+    cursor: not-allowed;
+  }
 }

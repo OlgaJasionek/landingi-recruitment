@@ -16,7 +16,7 @@ const Modal = ({ children, closeModal, headerText }: Props) => {
         <div className={styles.centered}>
           <div className={styles.modal}>
             <div className={styles.header}>
-              <h4>{headerText}</h4>
+              <h3>{headerText}</h3>
               <IconButton onClick={() => closeModal()}>
                 <CloseIcon />
               </IconButton>

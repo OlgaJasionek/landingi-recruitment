@@ -1,25 +1,21 @@
 .table {
-  padding: 20px;
   width: 100%;
   text-align: center;
 }
+
 .thead {
   position: sticky;
   top: 0;
   background-color: white;
+  border-bottom: 1px solid #e7e9ea;
+  color: #aaa7a7;
 }
-.tbody {
+
+.tableRow {
   border-bottom: 1px solid #e7e9ea;
   background-color: white;
   margin: 10px;
   padding: 10px;
-}
-
-.theader {
-  border-bottom: 1px solid #d3d5d6;
-  margin: 10px;
-  padding: 10px;
-  color: #878585;
 }
 
 .btn {
