@@ -1,0 +1,17 @@
+.iconBtn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  color: #aaa7a7;
+  background-color: transparent;
+  transition: background-color 0.7s;
+  cursor: pointer;
+}
+
+.iconBtn:hover {
+  background-color: #edecec8f;
+}
