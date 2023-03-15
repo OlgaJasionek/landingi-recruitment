@@ -1,37 +1,50 @@
 import axios from "axios";
 import { useState } from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-import { Product } from "../../common/types/cart-types";
+import {
+  Product,
+  SelectedProductsToNewCart,
+} from "../../common/types/cart-types";
 import AsyncSearchBar from "../ui/async-search-bar/async-search-bar.component";
 import Button from "../ui/button/button.component";
 import Counter from "../ui/counter/counter.component";
+import IconButton from "../ui/icon-button/icon-button.component";
 import Modal from "../ui/modal/modal.component";
 
 import styles from "./add-new-cart-form.module.scss";
-
-type SelectOption = {
-  value: string | number;
-  label: string;
-  quantity: number;
-}; //TODO : PRZENIEŚĆ DO WSPÓLNEGO PLIKU Z TYPAMI
+import { SelectOption } from "../../common/types/select-options";
 
 type Props = {
   isOpen: boolean;
+  onAddNewCart: (products: SelectedProductsToNewCart[]) => Promise<void>;
   onClose: () => void;
 };
 
-const AddNewCartForm = ({ isOpen, onClose }: Props) => {
+const AddNewCartForm = ({ isOpen, onClose, onAddNewCart }: Props) => {
   const [selectedProducts, setSelectedProducts] = useState<SelectOption[]>([]);
-  console.log(selectedProducts);
 
   const getSelectedProduct = (value: SelectOption) => {
-    setSelectedProducts(prev => [...prev, value]);
+    const productExistedInCart = selectedProducts.find(
+      product => product.value === value.value
+    );
+
+    productExistedInCart
+      ? setSelectedProducts(prev =>
+          prev.map(product => {
+            return product.value === productExistedInCart.value
+              ? { ...product, quantity: product.quantity + 1 }
+              : product;
+          })
+        )
+      : setSelectedProducts(prev => [...prev, value]);
   };
 
-  const onChangeItemQuantity = (
-    productId: number | string,
-    newQuantity: number
-  ) => {
+  const deleteSelectedProduct = (id: number) => {
+    setSelectedProducts(prev => prev.filter(product => product.value !== id));
+  };
+
+  const onChangeItemQuantity = (productId: number, newQuantity: number) => {
     setSelectedProducts(prevState =>
       prevState.map(product => ({
         ...product,
@@ -72,19 +85,36 @@ const AddNewCartForm = ({ isOpen, onClose }: Props) => {
               {selectedProducts.map(product => (
                 <li className={styles.product}>
                   <span>{product.label} </span>
-                  <Counter
-                    value={product.quantity}
-                    onChange={value =>
-                      onChangeItemQuantity(product.value, value)
-                    }
-                  />
+
+                  <div className={styles.actions}>
+                    <Counter
+                      value={product.quantity}
+                      onChange={value =>
+                        onChangeItemQuantity(product.value, value)
+                      }
+                    />
+                    <IconButton
+                      onClick={() => deleteSelectedProduct(product.value)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </div>
                 </li>
               ))}
             </ul>
           </div>
-          <div className={styles.btns}>
-            <Button theme='text' onClick={() => {}} text='Anuluj' />
-            <Button theme='contained' onClick={() => {}} text='Dodaj ' />
+          <div className={styles.buttons}>
+            <Button theme='text' onClick={onClose} text='Anuluj' />
+            <Button
+              theme='contained'
+              onClick={() =>
+                onAddNewCart(
+                  selectedProducts.map(product => {
+                    return { id: product.value, quantity: product.quantity };
+                  })
+                )
+              }
+              text='Dodaj '
+            />
           </div>
         </Modal>
       )}

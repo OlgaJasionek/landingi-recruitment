@@ -17,3 +17,8 @@ export type Cart = {
   totalProducts: number;
   totalQuantity: number;
 };
+
+export type SelectedProductsToNewCart = {
+  id: number;
+  quantity: number;
+};

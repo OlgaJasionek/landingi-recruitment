@@ -5,7 +5,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { debounce } from "@mui/material";
 
 type SelectOption = {
-  value: string | number;
+  value: number;
   label: string;
   quantity: number;
 }; //TODO:PRZENIEŚĆ DO WSPÓLNEGO PLIKU Z TYPAMI
@@ -53,7 +53,7 @@ const AsyncSearchBar = ({ getOptionsFn, onSelectedValue }: Props) => {
       }
 
       if (inputValue && !selectedValue) {
-        const option = newOptions.find(o => o.value === inputValue);
+        const option = newOptions.find(o => o.value === parseInt(inputValue));
 
         if (option) {
           setSelectedValue(option);

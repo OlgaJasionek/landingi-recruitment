@@ -1,5 +1,5 @@
 import "./App.scss";
-import CartList from "./components/cart/cart-list.component";
+import CartList from "./components/cart-list/cart-list.component";
 
 function App() {
   return (

@@ -19,7 +19,7 @@ const CartTable = ({ onGetCart, cartList, onDeleteCart }: Props) => {
       <Card>
         <table className={styles.table}>
           <thead className={styles.thead}>
-            <tr className={styles.tr}>
+            <tr>
               <th className={styles.tableRow}></th>
               <th className={styles.tableRow}>Ilość produktów</th>
               <th className={styles.tableRow}>Cena koszyka</th>
@@ -27,25 +27,22 @@ const CartTable = ({ onGetCart, cartList, onDeleteCart }: Props) => {
               <th className={styles.tableRow}>
                 Ilość wszystkich produktów w koszyku
               </th>
-              <th className={styles.tableRow}>Produkty w koszyku</th>
 
               <th className={styles.tableRow}></th>
             </tr>
           </thead>
           <tbody>
             {cartList.map(cart => (
-              <tr key={cart.id} className={styles.tr}>
+              <tr
+                key={cart.id}
+                className={styles.tr}
+                onClick={() => onGetCart(cart.id)}>
                 <td className={styles.tableRow}>{cart.id}</td>
                 <td className={styles.tableRow}>{cart.totalProducts}</td>
                 <td className={styles.tableRow}>{cart.total}</td>
                 <td className={styles.tableRow}>{cart.discountedTotal}</td>
                 <td className={styles.tableRow}>{cart.totalQuantity}</td>
-                <td className={styles.tableRow}>
-                  <Button
-                    onClick={() => onGetCart(cart.id)}
-                    theme='text'
-                    text='Pokaż'></Button>
-                </td>
+
                 <td className={styles.tbody}>
                   <IconButton onClick={() => onDeleteCart(cart.id)}>
                     <DeleteIcon />
