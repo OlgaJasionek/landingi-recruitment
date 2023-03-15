@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
+import { ReactNode, MouseEvent } from "react";
 
 import styles from "./icon-button.module.scss";
 
 type Props = {
   children: ReactNode;
   disabled?: boolean;
-  onClick: () => void;
+  onClick: (event: MouseEvent) => void;
 };
 
 const IconButton = ({ children, disabled, onClick }: Props) => {

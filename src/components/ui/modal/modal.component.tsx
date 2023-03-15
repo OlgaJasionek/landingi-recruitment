@@ -17,9 +17,11 @@ const Modal = ({ children, closeModal, headerText }: Props) => {
           <div className={styles.modal}>
             <div className={styles.header}>
               <h3>{headerText}</h3>
-              <IconButton onClick={() => closeModal()}>
-                <CloseIcon />
-              </IconButton>
+              <div className={styles.closeBtn}>
+                <IconButton onClick={() => closeModal()}>
+                  <CloseIcon />
+                </IconButton>
+              </div>
             </div>
             {children}
           </div>

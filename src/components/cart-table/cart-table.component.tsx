@@ -1,6 +1,6 @@
 import DeleteIcon from "@mui/icons-material/Delete";
+import { MouseEvent } from "react";
 import { Cart } from "../../common/types/cart-types";
-import Button from "../ui/button/button.component";
 
 import Card from "../ui/card/card.component";
 import IconButton from "../ui/icon-button/icon-button.component";
@@ -13,21 +13,23 @@ type Props = {
   onDeleteCart: (id: number) => void;
 };
 
-const CartTable = ({ onGetCart, cartList, onDeleteCart }: Props) => {
+const CartTable = ({ cartList, onGetCart, onDeleteCart }: Props) => {
+  const deleteCartHandler = (event: MouseEvent, cartId: number) => {
+    onDeleteCart(cartId);
+    event.stopPropagation();
+  };
+
   return (
     <>
       <Card>
         <table className={styles.table}>
-          <thead className={styles.thead}>
+          <thead>
             <tr>
-              <th className={styles.tableRow}></th>
-              <th className={styles.tableRow}>Ilość produktów</th>
-              <th className={styles.tableRow}>Cena koszyka</th>
-              <th className={styles.tableRow}>Cena koszyka po rabacie</th>
-              <th className={styles.tableRow}>
-                Ilość wszystkich produktów w koszyku
-              </th>
-
+              <th></th>
+              <th>Ilość produktów</th>
+              <th>Cena koszyka</th>
+              <th>Cena koszyka po rabacie</th>
+              <th>Ilość wszystkich produktów w koszyku</th>
               <th className={styles.tableRow}></th>
             </tr>
           </thead>
@@ -37,14 +39,14 @@ const CartTable = ({ onGetCart, cartList, onDeleteCart }: Props) => {
                 key={cart.id}
                 className={styles.tr}
                 onClick={() => onGetCart(cart.id)}>
-                <td className={styles.tableRow}>{cart.id}</td>
-                <td className={styles.tableRow}>{cart.totalProducts}</td>
-                <td className={styles.tableRow}>{cart.total}</td>
-                <td className={styles.tableRow}>{cart.discountedTotal}</td>
-                <td className={styles.tableRow}>{cart.totalQuantity}</td>
-
-                <td className={styles.tbody}>
-                  <IconButton onClick={() => onDeleteCart(cart.id)}>
+                <td>{cart.id}</td>
+                <td>{cart.totalProducts}</td>
+                <td>{cart.total}</td>
+                <td>{cart.discountedTotal}</td>
+                <td>{cart.totalQuantity}</td>
+                <td>
+                  <IconButton
+                    onClick={event => deleteCartHandler(event, cart.id)}>
                     <DeleteIcon />
                   </IconButton>
                 </td>

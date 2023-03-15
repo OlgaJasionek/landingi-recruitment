@@ -14,6 +14,8 @@ import Modal from "../ui/modal/modal.component";
 
 import styles from "./add-new-cart-form.module.scss";
 import { SelectOption } from "../../common/types/select-options";
+import ModalContent from "../ui/modal/modal-content/modal-content.component";
+import ModalActions from "../ui/modal/modal-actions/modal-actions.component";
 
 type Props = {
   isOpen: boolean;
@@ -38,6 +40,21 @@ const AddNewCartForm = ({ isOpen, onClose, onAddNewCart }: Props) => {
           })
         )
       : setSelectedProducts(prev => [...prev, value]);
+  };
+
+  const closeModalHandler = () => {
+    onClose();
+    setSelectedProducts([]);
+  };
+
+  const addNewCartHandler = () => {
+    onAddNewCart(
+      selectedProducts.map(product => {
+        return { id: product.value, quantity: product.quantity };
+      })
+    );
+    onClose();
+    setSelectedProducts([]);
   };
 
   const deleteSelectedProduct = (id: number) => {
@@ -71,51 +88,50 @@ const AddNewCartForm = ({ isOpen, onClose, onAddNewCart }: Props) => {
   return (
     <>
       {isOpen && (
-        <Modal closeModal={onClose} headerText='Dodaj nowy koszyk'>
+        <Modal closeModal={closeModalHandler} headerText='Dodaj nowy koszyk'>
           <form>
-            <h4>Wyszukaj produkty które chcesz dodać do koszyka</h4>
+            <div className='text-label mb-1'>
+              Wyszukaj produkty które chcesz dodać do koszyka
+            </div>
             <AsyncSearchBar
               onSelectedValue={getSelectedProduct}
               getOptionsFn={getProductsOptions}
             />
           </form>
-          <div>
-            <h5>Lista dodanych produktów:</h5>
-            <ul>
-              {selectedProducts.map(product => (
-                <li className={styles.product}>
-                  <span>{product.label} </span>
-
-                  <div className={styles.actions}>
-                    <Counter
-                      value={product.quantity}
-                      onChange={value =>
-                        onChangeItemQuantity(product.value, value)
-                      }
-                    />
-                    <IconButton
-                      onClick={() => deleteSelectedProduct(product.value)}>
-                      <DeleteIcon />
-                    </IconButton>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className={styles.buttons}>
-            <Button theme='text' onClick={onClose} text='Anuluj' />
+          <ModalContent>
+            <div>
+              <div className='text-label mt-2 mb-1'>
+                Lista dodanych produktów
+              </div>
+              <ul className={styles.list}>
+                {selectedProducts.map(product => (
+                  <li className={styles.product}>
+                    <span>{product.label} </span>
+                    <div className={styles.actions}>
+                      <Counter
+                        value={product.quantity}
+                        onChange={value =>
+                          onChangeItemQuantity(product.value, value)
+                        }
+                      />
+                      <IconButton
+                        onClick={() => deleteSelectedProduct(product.value)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </ModalContent>
+          <ModalActions>
+            <Button theme='text' onClick={closeModalHandler} text='Anuluj' />
             <Button
               theme='contained'
-              onClick={() =>
-                onAddNewCart(
-                  selectedProducts.map(product => {
-                    return { id: product.value, quantity: product.quantity };
-                  })
-                )
-              }
+              onClick={() => addNewCartHandler()}
               text='Dodaj '
             />
-          </div>
+          </ModalActions>
         </Modal>
       )}
     </>

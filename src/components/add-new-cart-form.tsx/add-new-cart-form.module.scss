@@ -6,13 +6,13 @@
   padding: 10px 0;
 }
 
-.buttons {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
 .actions {
   display: flex;
   align-items: center;
+}
+
+.list {
+  li:last-child {
+    border-bottom: 0;
+  }
 }

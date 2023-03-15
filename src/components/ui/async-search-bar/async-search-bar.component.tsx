@@ -70,6 +70,8 @@ const AsyncSearchBar = ({ getOptionsFn, onSelectedValue }: Props) => {
       filterOptions={x => x}
       filterSelectedOptions
       value={selectedValue}
+      noOptionsText='Nie znaleziono produktów'
+      loadingText='Szukanie..'
       getOptionLabel={option => option.label}
       options={options}
       loading={loadingOptions}
@@ -78,7 +80,12 @@ const AsyncSearchBar = ({ getOptionsFn, onSelectedValue }: Props) => {
         setSelectedValue(newValue);
         if (newValue) {
           onSelectedValue(newValue);
-          setSelectedValue(null);
+          setInputValue("");
+          setOptions([]);
+
+          setTimeout(() => {
+            setSelectedValue(null);
+          }, 0);
         }
       }}
       onInputChange={(_, newInputValue) => {

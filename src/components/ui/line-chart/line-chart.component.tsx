@@ -28,7 +28,7 @@ type Props = {
 const LineChart = ({ chartData }: Props) => {
   return (
     <>
-      <div>
+      <div style={{ width: "100%" }}>
         <Line data={chartData} />
       </div>
     </>

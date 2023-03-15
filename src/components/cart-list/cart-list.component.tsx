@@ -47,7 +47,10 @@ const CartList = () => {
         setProducts(data.data.products);
         setOpenProductsModal(true);
       }
-    } catch (err) {}
+    } catch (err) {
+      setSnacbarText("Nie znaleziono koszyka z takim id");
+      setOpenErrorSnackbar(true);
+    }
   };
 
   const deleteCartHandler = async (id: number) => {
@@ -72,7 +75,6 @@ const CartList = () => {
       const newCart = data.data;
 
       setCartList(prev => [...prev, newCart]);
-      closeAddCartModalHandler();
       setSnacbarText("Pomyślnie dodano nowy koszyk");
       setOpenSuccessSnackbar(true);
     } catch (err) {
@@ -100,7 +102,7 @@ const CartList = () => {
           <Button
             theme='contained'
             onClick={() => openAddCartModalHandler()}
-            text='DODAJ NOWY KOSZYK'
+            text='Dodaj nowy koszyk'
           />
         </div>
         {initLoading ? (
