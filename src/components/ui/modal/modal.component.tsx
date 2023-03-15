@@ -12,7 +12,7 @@ type Props = {
 const Modal = ({ children, closeModal, headerText }: Props) => {
   return (
     <>
-      <div className={styles.darkBG}>
+      <div className={styles.wrapper}>
         <div className={styles.centered}>
           <div className={styles.modal}>
             <div className={styles.header}>

@@ -8,12 +8,12 @@ import IconButton from "../ui/icon-button/icon-button.component";
 import styles from "./cart-table.module.scss";
 
 type Props = {
-  cartList: Cart[];
+  carts: Cart[];
   onGetCart: (id: number) => void;
   onDeleteCart: (id: number) => void;
 };
 
-const CartTable = ({ cartList, onGetCart, onDeleteCart }: Props) => {
+const CartTable = ({ carts, onGetCart, onDeleteCart }: Props) => {
   const deleteCartHandler = (event: MouseEvent, cartId: number) => {
     onDeleteCart(cartId);
     event.stopPropagation();
@@ -34,7 +34,7 @@ const CartTable = ({ cartList, onGetCart, onDeleteCart }: Props) => {
             </tr>
           </thead>
           <tbody>
-            {cartList.map(cart => (
+            {carts.map(cart => (
               <tr
                 key={cart.id}
                 className={styles.tr}

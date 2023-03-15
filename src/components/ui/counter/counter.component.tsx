@@ -1,8 +1,7 @@
 import AddIcon from "@mui/icons-material/Add";
-
-import IconButton from "../icon-button/icon-button.component";
 import RemoveIcon from "@mui/icons-material/Remove";
 
+import IconButton from "../icon-button/icon-button.component";
 import styles from "./counter.module.scss";
 
 type Props = {

@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+
 import styles from "./modal-actions.module.scss";
 
 type Props = {
@@ -6,7 +7,7 @@ type Props = {
 };
 
 const ModalActions = ({ children }: Props) => {
-  return <div className={styles.buttonsGroup}>{children}</div>;
+  return <div className={styles.wrapper}>{children}</div>;
 };
 
 export default ModalActions;

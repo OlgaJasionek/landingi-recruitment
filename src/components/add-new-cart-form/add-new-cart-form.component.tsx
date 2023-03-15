@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import { SelectedProductsToNewCart } from "../../common/types/cart-types";
+import { NewCartProductDto } from "../../common/types/cart-types";
 import AsyncSearchBar from "../ui/async-search-bar/async-search-bar.component";
 import Button from "../ui/button/button.component";
 import Counter from "../ui/counter/counter.component";
@@ -10,22 +10,22 @@ import Modal from "../ui/modal/modal.component";
 import { SelectOption } from "../../common/types/select-options";
 import ModalContent from "../ui/modal/modal-content/modal-content.component";
 import ModalActions from "../ui/modal/modal-actions/modal-actions.component";
-import { getProductsOptionsToNewCart } from "../../common/api/products-api";
+import { getProductsOptions } from "../../common/api/products-api";
 
 import styles from "./add-new-cart-form.module.scss";
 
 type Props = {
   isOpen: boolean;
-  onAddNewCart: (products: SelectedProductsToNewCart[]) => Promise<void>;
+  onAddNewCart: (products: NewCartProductDto[]) => Promise<void>;
   onClose: () => void;
 };
 
 const AddNewCartForm = ({ isOpen, onClose, onAddNewCart }: Props) => {
   const [selectedProducts, setSelectedProducts] = useState<SelectOption[]>([]);
 
-  const getProductsOptions = async (q: string): Promise<SelectOption[]> => {
+  const loadProductsOptions = async (q: string): Promise<SelectOption[]> => {
     try {
-      const resp = await getProductsOptionsToNewCart(q);
+      const resp = await getProductsOptions(q);
       const products = resp.products;
       const options = products.map(product => {
         return { value: product.id, label: product.title, quantity: 1 };
@@ -36,7 +36,7 @@ const AddNewCartForm = ({ isOpen, onClose, onAddNewCart }: Props) => {
     }
   };
 
-  const getSelectedProduct = (value: SelectOption) => {
+  const selectProductHandler = (value: SelectOption) => {
     const productExistedInCart = selectedProducts.find(
       product => product.value === value.value
     );
@@ -88,8 +88,8 @@ const AddNewCartForm = ({ isOpen, onClose, onAddNewCart }: Props) => {
               Wpisz nazwę produktu który chcesz dodać do koszyka
             </div>
             <AsyncSearchBar
-              onSelectedValue={getSelectedProduct}
-              getOptionsFn={getProductsOptions}
+              onSelectValue={selectProductHandler}
+              getOptionsFn={loadProductsOptions}
             />
           </form>
           <ModalContent>
@@ -100,7 +100,7 @@ const AddNewCartForm = ({ isOpen, onClose, onAddNewCart }: Props) => {
               <ul className={styles.list}>
                 {selectedProducts.map(product => (
                   <li key={product.value} className={styles.product}>
-                    <span>{product.label} </span>
+                    <span>{product.label}</span>
                     <div className={styles.actions}>
                       <Counter
                         value={product.quantity}

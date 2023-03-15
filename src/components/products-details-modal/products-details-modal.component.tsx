@@ -11,7 +11,7 @@ type Props = {
   closeModal: () => void;
 };
 
-const ProductsModal = ({ products, isOpen, closeModal }: Props) => {
+const ProductsDetailsModal = ({ products, isOpen, closeModal }: Props) => {
   const chartInputData: ChartData<"line"> = {
     labels: products.map(product => product.title),
     datasets: [
@@ -43,4 +43,4 @@ const ProductsModal = ({ products, isOpen, closeModal }: Props) => {
   );
 };
 
-export default ProductsModal;
+export default ProductsDetailsModal;

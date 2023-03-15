@@ -1,25 +1,25 @@
 import { useEffect, useState } from "react";
 
-import ProductsModal from "../products-details-modal/products-details-modal.component";
+import ProductsDetailsModal from "../products-details-modal/products-details-modal.component";
 import {
   Cart,
   Product,
-  SelectedProductsToNewCart,
+  NewCartProductDto,
 } from "../../common/types/cart-types";
 import CartTable from "../cart-list-table/cart-list-table.component";
 import Button from "../ui/button/button.component";
-import AddNewCartForm from "../add-new-cart-form.tsx/add-new-cart-form.component";
+import AddNewCartForm from "../add-new-cart-form/add-new-cart-form.component";
 import Loader from "../ui/loader/loader.component";
 import Snackbar from "../ui/snackbar/snackbar.component";
 import {
   addNewCart,
   deleteCart,
-  getCartListData,
+  getCartsData,
   getOneCartData,
 } from "../../common/api/cart-api";
 
 const CartList = () => {
-  const [cartList, setCartList] = useState<Cart[]>([]);
+  const [carts, setCarts] = useState<Cart[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
 
   const [openProductsModal, setOpenProductsModal] = useState(false);
@@ -32,14 +32,14 @@ const CartList = () => {
   const [initLoading, setInitLoading] = useState(true);
 
   useEffect(() => {
-    getCartList();
+    getCarts();
   }, []);
 
-  const getCartList = async () => {
+  const getCarts = async () => {
     try {
-      const resp = await getCartListData();
+      const resp = await getCartsData();
 
-      setCartList(resp.carts);
+      setCarts(resp.carts);
     } catch (err) {}
     setInitLoading(false);
   };
@@ -63,7 +63,7 @@ const CartList = () => {
       const resp = await deleteCart(id);
       const deletedCartId = resp.id;
 
-      setCartList(prev => prev.filter(cart => cart.id !== deletedCartId));
+      setCarts(prev => prev.filter(cart => cart.id !== deletedCartId));
       setSnacbarText("Pomyślnie usunięto koszyk");
       setOpenSuccessSnackbar(true);
     } catch (err) {
@@ -72,11 +72,11 @@ const CartList = () => {
     }
   };
 
-  const addNewCartHandler = async (products: SelectedProductsToNewCart[]) => {
+  const addNewCartHandler = async (products: NewCartProductDto[]) => {
     try {
       const newCart = await addNewCart(products);
 
-      setCartList(prev => [...prev, newCart]);
+      setCarts(prev => [...prev, newCart]);
       setSnacbarText("Pomyślnie dodano nowy koszyk");
       setOpenSuccessSnackbar(true);
     } catch (err) {
@@ -98,49 +98,47 @@ const CartList = () => {
   };
 
   return (
-    <>
-      <section className='container'>
-        <div className='header'>
-          <Button
-            theme='contained'
-            onClick={() => openAddCartModalHandler()}
-            text='Dodaj nowy koszyk'
-          />
-        </div>
-        {initLoading ? (
-          <Loader />
-        ) : (
-          <CartTable
-            cartList={cartList}
-            onGetCart={getOneCartHandler}
-            onDeleteCart={deleteCartHandler}
-          />
-        )}
+    <section className='container'>
+      <div className='header'>
+        <Button
+          theme='contained'
+          onClick={() => openAddCartModalHandler()}
+          text='Dodaj nowy koszyk'
+        />
+      </div>
+      {initLoading ? (
+        <Loader />
+      ) : (
+        <CartTable
+          carts={carts}
+          onGetCart={getOneCartHandler}
+          onDeleteCart={deleteCartHandler}
+        />
+      )}
 
-        <ProductsModal
-          products={products}
-          isOpen={openProductsModal}
-          closeModal={closeProductsModalHandler}
-        />
-        <AddNewCartForm
-          isOpen={openAddNewCartModal}
-          onClose={closeAddCartModalHandler}
-          onAddNewCart={addNewCartHandler}
-        />
-        <Snackbar
-          color='success'
-          open={openSuccessSnackBar}
-          text={snackbarText}
-          handleClose={() => setOpenSuccessSnackbar(false)}
-        />
-        <Snackbar
-          color='error'
-          open={openErrorSnackBar}
-          text={snackbarText}
-          handleClose={() => setOpenErrorSnackbar(false)}
-        />
-      </section>
-    </>
+      <ProductsDetailsModal
+        products={products}
+        isOpen={openProductsModal}
+        closeModal={closeProductsModalHandler}
+      />
+      <AddNewCartForm
+        isOpen={openAddNewCartModal}
+        onClose={closeAddCartModalHandler}
+        onAddNewCart={addNewCartHandler}
+      />
+      <Snackbar
+        color='success'
+        open={openSuccessSnackBar}
+        text={snackbarText}
+        handleClose={() => setOpenSuccessSnackbar(false)}
+      />
+      <Snackbar
+        color='error'
+        open={openErrorSnackBar}
+        text={snackbarText}
+        handleClose={() => setOpenErrorSnackbar(false)}
+      />
+    </section>
   );
 };
 

@@ -3,14 +3,15 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import CircularProgress from "@mui/material/CircularProgress";
 import { debounce } from "@mui/material";
+
 import { SelectOption } from "../../../common/types/select-options";
 
 type Props = {
   getOptionsFn: (q: string) => Promise<SelectOption[]>;
-  onSelectedValue: (value: SelectOption) => void;
+  onSelectValue: (value: SelectOption) => void;
 };
 
-const AsyncSearchBar = ({ getOptionsFn, onSelectedValue }: Props) => {
+const AsyncSearchBar = ({ getOptionsFn, onSelectValue }: Props) => {
   const [selectedValue, setSelectedValue] = useState<SelectOption | null>(null);
   const [inputValue, setInputValue] = useState<string>("");
   const [options, setOptions] = useState<SelectOption[]>([]);
@@ -25,7 +26,7 @@ const AsyncSearchBar = ({ getOptionsFn, onSelectedValue }: Props) => {
           });
         }
       }, 1000),
-    []
+    [getOptionsFn]
   );
 
   useEffect(() => {
@@ -74,7 +75,7 @@ const AsyncSearchBar = ({ getOptionsFn, onSelectedValue }: Props) => {
         setOptions(newValue ? [newValue, ...options] : options);
         setSelectedValue(newValue);
         if (newValue) {
-          onSelectedValue(newValue);
+          onSelectValue(newValue);
           setInputValue("");
           setOptions([]);
 

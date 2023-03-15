@@ -18,7 +18,7 @@ export type Cart = {
   totalQuantity: number;
 };
 
-export type SelectedProductsToNewCart = {
+export type NewCartProductDto = {
   id: number;
   quantity: number;
 };

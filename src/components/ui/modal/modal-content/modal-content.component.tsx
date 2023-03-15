@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 import styles from "./modal-content.module.scss";
+
 type Props = {
   children: ReactNode;
 };
