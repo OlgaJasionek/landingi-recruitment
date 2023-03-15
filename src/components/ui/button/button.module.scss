@@ -5,10 +5,11 @@
   border: none;
   border-radius: 5px;
   background-color: #ffffff;
-  cursor: pointer;
-  transition: background-color 0.7s;
   font-weight: 600;
+  transition: background-color 0.7s;
+  cursor: pointer;
 }
+
 .text {
   color: #1876d2;
 }
@@ -20,6 +21,7 @@
 .contained {
   background-color: #1876d2;
 }
+
 .contained:hover {
   background-color: #0059b2;
 }

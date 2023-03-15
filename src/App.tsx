@@ -3,10 +3,8 @@ import CartList from "./components/cart-list/cart-list.component";
 
 function App() {
   return (
-    <div className='App'>
-      <header>
-        <CartList />
-      </header>
+    <div>
+      <CartList />
     </div>
   );
 }

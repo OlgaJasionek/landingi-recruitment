@@ -5,11 +5,11 @@
   border-spacing: 0;
 
   thead {
+    box-sizing: border-box;
     position: sticky;
     top: 0;
     background-color: white;
     color: #aaa7a7;
-    box-sizing: border-box;
 
     tr th {
       padding: 20px;
@@ -18,13 +18,13 @@
   }
 
   tr td {
-    border-bottom: 1px solid #e7e9ea;
     padding: 10px 20px;
+    border-bottom: 1px solid #e7e9ea;
   }
 
   tbody tr {
-    cursor: pointer;
     transition: background-color 0.5s;
+    cursor: pointer;
 
     &:hover {
       background-color: #f6f2f2;
@@ -38,10 +38,9 @@
   font-weight: bold;
   border: none;
   border-radius: 10px;
-  text-transform: uppercase;
   background-color: #ffffff;
-  cursor: pointer;
   transition: background-color 0.7s;
+  cursor: pointer;
 }
 
 .btn:hover {

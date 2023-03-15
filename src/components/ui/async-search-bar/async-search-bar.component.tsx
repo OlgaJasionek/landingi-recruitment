@@ -3,12 +3,7 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import CircularProgress from "@mui/material/CircularProgress";
 import { debounce } from "@mui/material";
-
-type SelectOption = {
-  value: number;
-  label: string;
-  quantity: number;
-}; //TODO:PRZENIEŚĆ DO WSPÓLNEGO PLIKU Z TYPAMI
+import { SelectOption } from "../../../common/types/select-options";
 
 type Props = {
   getOptionsFn: (q: string) => Promise<SelectOption[]>;

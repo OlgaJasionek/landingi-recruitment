@@ -2,9 +2,8 @@ import { ChartData } from "chart.js";
 
 import { Product } from "../../common/types/cart-types";
 import LineChart from "../ui/line-chart/line-chart.component";
+import ModalContent from "../ui/modal/modal-content/modal-content.component";
 import Modal from "../ui/modal/modal.component";
-
-// import styles from "./products-modal.module.scss";
 
 type Props = {
   products: Product[];
@@ -35,7 +34,9 @@ const ProductsModal = ({ products, isOpen, closeModal }: Props) => {
     <>
       {isOpen && (
         <Modal closeModal={closeModal} headerText='Produkty w koszyku'>
-          <LineChart chartData={chartInputData} />
+          <ModalContent>
+            <LineChart chartData={chartInputData} />
+          </ModalContent>
         </Modal>
       )}
     </>

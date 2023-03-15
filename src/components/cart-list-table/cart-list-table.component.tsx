@@ -1,7 +1,7 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import { MouseEvent } from "react";
-import { Cart } from "../../common/types/cart-types";
 
+import { Cart } from "../../common/types/cart-types";
 import Card from "../ui/card/card.component";
 import IconButton from "../ui/icon-button/icon-button.component";
 

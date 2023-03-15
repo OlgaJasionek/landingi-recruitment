@@ -1,19 +1,22 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 
-import ProductsModal from "../products-modal/products-modal.component";
+import ProductsModal from "../products-details-modal/products-details-modal.component";
 import {
   Cart,
   Product,
   SelectedProductsToNewCart,
 } from "../../common/types/cart-types";
-import CartTable from "../cart-table/cart-table.component";
+import CartTable from "../cart-list-table/cart-list-table.component";
 import Button from "../ui/button/button.component";
 import AddNewCartForm from "../add-new-cart-form.tsx/add-new-cart-form.component";
 import Loader from "../ui/loader/loader.component";
 import Snackbar from "../ui/snackbar/snackbar.component";
-
-// import styles from "./cart-list.module.scss";
+import {
+  addNewCart,
+  deleteCart,
+  getCartListData,
+  getOneCartData,
+} from "../../common/api/cart-api";
 
 const CartList = () => {
   const [cartList, setCartList] = useState<Cart[]>([]);
@@ -34,8 +37,9 @@ const CartList = () => {
 
   const getCartList = async () => {
     try {
-      const data = await axios.get("https://dummyjson.com/carts");
-      setCartList(data.data.carts);
+      const resp = await getCartListData();
+
+      setCartList(resp.carts);
     } catch (err) {}
     setInitLoading(false);
   };
@@ -43,8 +47,9 @@ const CartList = () => {
   const getOneCartHandler = async (id: number) => {
     try {
       if (id) {
-        const data = await axios.get(`https://dummyjson.com/carts/${id}`);
-        setProducts(data.data.products);
+        const resp = await getOneCartData(id);
+
+        setProducts(resp.products);
         setOpenProductsModal(true);
       }
     } catch (err) {
@@ -55,8 +60,9 @@ const CartList = () => {
 
   const deleteCartHandler = async (id: number) => {
     try {
-      const data = await axios.delete(`https://dummyjson.com/carts/${id}`);
-      const deletedCartId = data.data.id;
+      const resp = await deleteCart(id);
+      const deletedCartId = resp.id;
+
       setCartList(prev => prev.filter(cart => cart.id !== deletedCartId));
       setSnacbarText("Pomyślnie usunięto koszyk");
       setOpenSuccessSnackbar(true);
@@ -68,11 +74,7 @@ const CartList = () => {
 
   const addNewCartHandler = async (products: SelectedProductsToNewCart[]) => {
     try {
-      const data = await axios.post("https://dummyjson.com/carts/add", {
-        userId: 1,
-        products: products,
-      });
-      const newCart = data.data;
+      const newCart = await addNewCart(products);
 
       setCartList(prev => [...prev, newCart]);
       setSnacbarText("Pomyślnie dodano nowy koszyk");
@@ -116,26 +118,26 @@ const CartList = () => {
         )}
 
         <ProductsModal
-          closeModal={closeProductsModalHandler}
           products={products}
           isOpen={openProductsModal}
+          closeModal={closeProductsModalHandler}
         />
         <AddNewCartForm
-          onClose={closeAddCartModalHandler}
           isOpen={openAddNewCartModal}
+          onClose={closeAddCartModalHandler}
           onAddNewCart={addNewCartHandler}
         />
         <Snackbar
-          open={openSuccessSnackBar}
-          handleClose={() => setOpenSuccessSnackbar(false)}
-          text={snackbarText}
           color='success'
+          open={openSuccessSnackBar}
+          text={snackbarText}
+          handleClose={() => setOpenSuccessSnackbar(false)}
         />
         <Snackbar
-          open={openErrorSnackBar}
-          handleClose={() => setOpenErrorSnackbar(false)}
-          text={snackbarText}
           color='error'
+          open={openErrorSnackBar}
+          text={snackbarText}
+          handleClose={() => setOpenErrorSnackbar(false)}
         />
       </section>
     </>

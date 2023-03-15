@@ -3,9 +3,9 @@ import ReactDOM from "react-dom";
 
 type Props = {
   open: boolean;
-  handleClose: () => void;
   text: string | null | undefined;
   color: AlertColor;
+  handleClose: () => void;
 };
 
 const Snackbar = ({ open, handleClose, text, color }: Props) => {
