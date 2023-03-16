@@ -30,15 +30,12 @@ const CartTable = ({ carts, onGetCart, onDeleteCart }: Props) => {
               <th>Cena koszyka</th>
               <th>Cena koszyka po rabacie</th>
               <th>Ilość wszystkich produktów w koszyku</th>
-              <th className={styles.tableRow}></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             {carts.map(cart => (
-              <tr
-                key={cart.id}
-                className={styles.tr}
-                onClick={() => onGetCart(cart.id)}>
+              <tr key={cart.id} onClick={() => onGetCart(cart.id)}>
                 <td>{cart.id}</td>
                 <td>{cart.totalProducts}</td>
                 <td>{cart.total}</td>

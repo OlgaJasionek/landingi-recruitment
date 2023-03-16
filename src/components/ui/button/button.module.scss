@@ -1,27 +1,29 @@
+@import "../../../styles/colors";
+
 .btn {
   margin: 5px;
   padding: 10px 15px;
   color: white;
   border: none;
   border-radius: 5px;
-  background-color: #ffffff;
+  background-color: white;
   font-weight: 600;
   transition: background-color 0.7s;
   cursor: pointer;
 }
 
 .text {
-  color: #1876d2;
-}
+  color: $text-btn-color;
 
-.text:hover {
-  background-color: #d7eafe78;
+  &:hover {
+    background-color: $text-btn-hover-color;
+  }
 }
 
 .contained {
-  background-color: #1876d2;
-}
+  background-color: $contained-btn-backgroundcolor;
 
-.contained:hover {
-  background-color: #0059b2;
+  &:hover {
+    background-color: $contained-btn-hover-color;
+  }
 }

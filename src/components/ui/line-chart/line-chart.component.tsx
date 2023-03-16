@@ -11,6 +11,8 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
+import styles from "./line-chart.module.scss";
+
 Chart.register(
   CategoryScale,
   LinearScale,
@@ -28,7 +30,7 @@ type Props = {
 const LineChart = ({ chartData }: Props) => {
   return (
     <>
-      <div style={{ width: "100%" }}>
+      <div className={styles.wrapper}>
         <Line data={chartData} />
       </div>
     </>
