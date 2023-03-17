@@ -2,10 +2,10 @@
 
 .card {
   margin: 20px 0;
-  max-height: 650px;
+  max-height: calc(100vh - 150px);
   background-color: white;
   border: $light-border;
   box-shadow: $card-box-shadow-color;
   border-radius: 10px;
-  overflow: scroll;
+  overflow: auto;
 }
