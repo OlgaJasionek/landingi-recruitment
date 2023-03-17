@@ -1,6 +1,6 @@
 import axios from "axios";
-import { API_URL } from "./api-url";
 
+import { API_URL } from "./api-url";
 import { Cart, Product, NewCartProductDto } from "../types/cart-types";
 
 export const getCartsData = (): Promise<{ carts: Cart[] }> =>

@@ -5,12 +5,17 @@ import styles from "./icon-button.module.scss";
 type Props = {
   children: ReactNode;
   disabled?: boolean;
+  name?: string;
   onClick: (event: MouseEvent) => void;
 };
 
-const IconButton = ({ children, disabled, onClick }: Props) => {
+const IconButton = ({ children, disabled, name, onClick }: Props) => {
   return (
-    <button onClick={onClick} className={styles.btn} disabled={disabled}>
+    <button
+      aria-label={name}
+      className={styles.btn}
+      disabled={disabled}
+      onClick={onClick}>
       {children}
     </button>
   );

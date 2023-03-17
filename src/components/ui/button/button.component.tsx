@@ -3,7 +3,7 @@ import classnames from "classnames";
 import styles from "./button.module.scss";
 
 type Props = {
-  theme: "outline" | "contained" | "text";
+  theme: "contained" | "text";
   text: string;
   onClick: () => void;
 };

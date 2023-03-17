@@ -20,11 +20,11 @@ const Counter = ({ value, onChange }: Props) => {
 
   return (
     <div className={styles.counter}>
-      <IconButton onClick={decrement} disabled={value === 1}>
+      <IconButton name='decreasebtn' onClick={decrement} disabled={value === 1}>
         <RemoveIcon />
       </IconButton>
       <div className={styles.quantity}>{value}</div>
-      <IconButton onClick={increment}>
+      <IconButton name='increasebtn' onClick={increment}>
         <AddIcon />
       </IconButton>
     </div>
