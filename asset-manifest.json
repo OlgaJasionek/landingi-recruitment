@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/landingi-recruitment/static/css/main.5e27a756.css",
-    "main.js": "/landingi-recruitment/static/js/main.ab95933c.js",
+    "main.css": "/landingi-recruitment/static/css/main.7c10faf2.css",
+    "main.js": "/landingi-recruitment/static/js/main.fe99aaad.js",
     "static/js/787.28cb0dcd.chunk.js": "/landingi-recruitment/static/js/787.28cb0dcd.chunk.js",
     "index.html": "/landingi-recruitment/index.html",
-    "main.5e27a756.css.map": "/landingi-recruitment/static/css/main.5e27a756.css.map",
-    "main.ab95933c.js.map": "/landingi-recruitment/static/js/main.ab95933c.js.map",
+    "main.7c10faf2.css.map": "/landingi-recruitment/static/css/main.7c10faf2.css.map",
+    "main.fe99aaad.js.map": "/landingi-recruitment/static/js/main.fe99aaad.js.map",
     "787.28cb0dcd.chunk.js.map": "/landingi-recruitment/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5e27a756.css",
-    "static/js/main.ab95933c.js"
+    "static/css/main.7c10faf2.css",
+    "static/js/main.fe99aaad.js"
   ]
 }
